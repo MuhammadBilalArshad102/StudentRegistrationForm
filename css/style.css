@@ -1,0 +1,506 @@
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+    --navy-deep: #0E1826;
+    --navy: #16233C;
+    --navy-soft: #223458;
+    --gold: #C9A227;
+    --gold-light: #E4C158;
+    --forest: #2F5233;
+    --crimson: #8B3A3A;
+    --parchment: #FAF6EC;
+    --paper: #FFFDF8;
+    --ink: #1B2434;
+    --muted: #6B7280;
+    --line: #E4DCC8;
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+    --radius: 4px;
+    --shadow-card: 0 20px 50px -20px rgba(14, 24, 38, 0.35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--parchment);
+    font-family: var(--font-body);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+    position: relative;
+    min-height: 46vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 60px 24px;
+    text-align: center;
+}
+
+.hero__photo {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://picsum.photos/1800/1000?grayscale');
+    background-size: cover;
+    background-position: center 35%;
+    filter: contrast(1.05) brightness(0.75);
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(14, 24, 38, 0.92) 0%, rgba(22, 35, 60, 0.88) 55%, rgba(14, 24, 38, 0.96) 100%);
+    mix-blend-mode: multiply;
+    background-color: var(--navy-deep);
+}
+
+.hero__overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201, 162, 39, 0.18), transparent 60%);
+}
+
+.hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    color: var(--parchment);
+}
+
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 18px;
+}
+
+.hero__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(32px, 5.5vw, 54px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+}
+
+.hero__rule {
+    width: 64px;
+    height: 2px;
+    background: var(--gold);
+    margin: 26px auto;
+}
+
+.hero__sub {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: #D6D9E2;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.content {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.enrollment-section {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 32px;
+    margin-top: -64px;
+    position: relative;
+    z-index: 3;
+    padding-bottom: 80px;
+}
+
+@media (max-width: 900px) {
+    .enrollment-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================
+   LEDGER CARD (FORM)
+   ============================================================ */
+.ledger-card {
+    background: var(--paper);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: 40px 32px 32px;
+    position: relative;
+    border: 1px solid var(--line);
+    height: fit-content;
+}
+
+.ledger-card__tab {
+    position: absolute;
+    top: -14px;
+    left: 32px;
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 3px;
+    box-shadow: 0 8px 16px -6px rgba(14, 24, 38, 0.5);
+}
+
+.field {
+    margin-bottom: 22px;
+}
+
+.field__label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.field__input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--line);
+    background: transparent;
+    padding: 8px 2px 10px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink);
+    transition: border-color 0.2s ease;
+}
+
+.field__select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+}
+
+.field__input:focus {
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+    border-bottom-color: var(--gold);
+}
+
+.field__select {
+    padding-right: 20px;
+}
+
+.field__input.is-invalid {
+    border-bottom-color: var(--crimson);
+}
+
+.field__error {
+    display: block;
+    min-height: 16px;
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--crimson);
+}
+
+/* ---- Stamp button ---- */
+.btn-stamp {
+    width: 100%;
+    margin-top: 8px;
+    height: 50px;
+    border: none;
+    border-radius: 3px;
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 20px -8px rgba(14, 24, 38, 0.5);
+}
+
+.btn-stamp:hover {
+    background: var(--navy-soft);
+    box-shadow: 0 14px 26px -10px rgba(14, 24, 38, 0.6);
+}
+
+.btn-stamp:active {
+    transform: scale(0.97);
+}
+
+/* ============================================================
+   ROSTER CARD (TABLE)
+   ============================================================ */
+.roster-card {
+    background: var(--paper);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    height: fit-content;
+}
+
+.roster-card__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 26px 28px 18px;
+    border-bottom: 1px solid var(--line);
+}
+
+.roster-card__header h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--navy);
+}
+
+.roster-card__count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.roster-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 640px;
+}
+
+.roster-table thead th {
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 14px 20px;
+    font-weight: 500;
+}
+
+.roster-table tbody td {
+    padding: 16px 20px;
+    font-size: 14.5px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    vertical-align: middle;
+}
+
+.roster-table tbody tr:nth-child(even) {
+    background: #FBF8F0;
+}
+
+.roster-table tbody tr:hover {
+    background: #F3ECD9;
+}
+
+.roster-table tbody tr.is-new {
+    animation: stamp-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes stamp-in {
+    0% {
+        opacity: 0;
+        transform: scale(1.12) rotate(-3deg);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(0.98) rotate(1deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.student-id {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--navy);
+}
+
+.student-id__seal {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--navy-deep);
+    box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--gold);
+    flex-shrink: 0;
+}
+
+.course-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    background: rgba(47, 82, 51, 0.1);
+    color: var(--forest);
+    border: 1px solid rgba(47, 82, 51, 0.25);
+}
+
+.row-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+    transition: all 0.15s ease;
+}
+
+.icon-btn--edit:hover {
+    border-color: var(--gold);
+    background: rgba(201, 162, 39, 0.1);
+}
+
+.icon-btn--delete:hover {
+    border-color: var(--crimson);
+    background: rgba(139, 58, 58, 0.08);
+}
+
+/* ---- Empty state ---- */
+.empty-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 56px 24px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.empty-state.is-visible {
+    display: flex;
+}
+
+.empty-state__seal {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px dashed var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--line);
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    padding: 14px 24px;
+    border-radius: 4px;
+    box-shadow: 0 16px 34px -10px rgba(14, 24, 38, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 50;
+}
+
+.toast.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+    text-align: center;
+    padding: 28px 24px 40px;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+    .hero {
+        min-height: 50vh;
+        padding: 48px 20px;
+    }
+
+    .ledger-card,
+    .roster-card__header {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    .roster-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .roster-table tbody tr.is-new {
+        animation: none;
+    }
+    .btn-stamp {
+        transition: none;
+    }
+}
